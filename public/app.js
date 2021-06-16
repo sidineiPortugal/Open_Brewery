@@ -3,11 +3,12 @@ var app = angular.module('linx_brewery', ['ngRoute']);
 //Configurando as rotas da aplicação
 app.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider){
 
+    // Trata a hashbang
     $locationProvider.hashPrefix('');
-
+    //Controle das rotas principais e defaul
     $routeProvider.when('/breweries',{
         templateUrl:"public/templates/home.html",
-        controller:'app_controller'
+        controller:'home_controller'
     }).when('/breweries/:id',{
         templateUrl:"public/templates/detail.html",
         controller:'detail_Controller'
@@ -18,13 +19,13 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
 
 //Rotas externas da aplicação
 app.service('breweryDB', ['$http', function($http){
-
+    //URL base da API
     let breweries_url = 'https://api.openbrewerydb.org/breweries';
-
+    // Função base para trazer a lista
     let list_breweries = ((filters)=>{
-        
         return $http.get(breweries_url+filters);
     });
+    //Recupera os detalhes de um card especifico conforme o seu id
     let detail_brewerie = ((id)=>{
         return $http.get(breweries_url + '/' + id);
     });
@@ -36,90 +37,71 @@ app.service('breweryDB', ['$http', function($http){
 }]);
 
 //Controllers
-app.controller('app_controller', ['$scope', 'breweryDB' , function($scope, breweryDB){
+app.controller('home_controller', ['$scope', 'breweryDB' , function($scope, breweryDB){
+    //Lista de filtros possiveis, por type's
     $scope.by_types = [{
-        value:'todos',
-        background:'#00d1b2',
-        color:'#fff'
+        value:'todos'
     },
     {
-        value:'micro',
-        background:'#00d1b2',
-        color:'#fff'
+        value:'micro'
     },
     {
-        value:'nano',
-        background:'#00d1b2',
-        color:'#fff'
+        value:'nano'
     },
     {
-        value:'regional',
-        background:'#3273dc',
-        color:'#fff'
+        value:'regional'
     },
     {
-        value:'brewpub',
-        background:'#ffdd57',
-        color:'black'
+        value:'brewpub'
     },{
-        value:'large',
-        background:'#ffdd57',
-        color:'black'
+        value:'large'
     },{
-        value:'planning',
-        background:'#3273dc',
-        color:'#fff'
+        value:'planning'
     },{
-        value:'bar',
-        background:'#3273dc',
-        color:'#fff'
+        value:'bar'
     },{
-        value:'contract',
-        background:'#ffdd57',
-        color:'black'
+        value:'contract'
     },{
-        value:'proprietor',
-        background:'#ffdd57',
-        color:'black'
+        value:'proprietor'
     },{
-        value:'closed',
-        background:'#ffdd57',
-        color:'black'
+        value:'closed'
     }];
-    $scope.changePagination = function(page){
-        if(page != $scope.param.page){
-            $scope.param.page = page;
-            $scope.list();
-        }
-    };
+    //Variaveis para controle da pagina
     $scope.breweries = [];
     $scope.typeValue = 'todos';
     $scope.param = {
         type: 'todos',
         page: 1
     };
+    //Lista os cards fazendo tratamento de filtro e paginação
     $scope.list = function(){
-
+        //Valida se existe paginação ou filtro
         let url_ = ('?page='+$scope.param.page) + ($scope.param.type != 'todos' ? '&by_type='+$scope.param.type : '');
-
+        //Realiza a requisição dos dados
         breweryDB.list_breweries(url_).then((response)=>{
             $scope.breweries = response.data
-            console.log(response.data);
         })
     }, function(erros){ console.log(erros);};
-
+    //Inicia a chamada de dados na pagina
     $scope.list();
+    //Altera o index da paginação recuperando novos dados 
+    $scope.changePagination = function(page){
+        if(page != $scope.param.page){
+            $scope.param.page = page;
+            $scope.list();
+        }
+    };
 }]);
-
+//Controler responsavel pela pagina de detalhes
 app.controller('detail_Controller', ['$scope', '$routeParams', 'breweryDB', function($scope, $routeParams, breweryDB){
-    console.log($routeParams.id);
+    // Variaveis para controle da pagina
     $scope.brewerie = {};
+    //Envia o id da rota para requisção recuperar os dados especificos do card
     $scope.show_detail = function(){
         breweryDB.detail_brewerie($routeParams.id).then((response)=>{
             $scope.brewerie = response.data;
-            console.log(response.data);
         })
     }, function(erros){ console.log(erros);};
-
+    //Inicia a chamada de dados na pagina
     $scope.show_detail();
 }]);

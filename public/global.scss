@@ -2,11 +2,8 @@
     display: flex;
     width: 100%;
 }
-
 $cinza : #4a4a4a;
-
 $sombra : 0 1px 8px 0 rgb(0 0 0 / 5%), 0 1px 5px 0 rgb(0 0 0 / 5%);
-
 
 html{
     @include flex();
@@ -15,6 +12,7 @@ html{
     background: #fff;
     font-family: 'Noto Serif', serif;
     color: $cinza;
+    
     .flex{
         display: flex;
         width: 100%;
@@ -34,9 +32,17 @@ html{
         .home-page{
             padding: 10px 0px;
         }
-        .title-page{
+        .title-home{
             font-weight: bold;
             padding-right: 5px;
+        }
+        .title-detail{
+            text-decoration: none !important;
+            color: $cinza !important;
+            .letter-back{
+                font-weight: bold;
+                margin-right: 5px;
+            }
         }
     }
 
@@ -81,6 +87,19 @@ html{
         height: 200px;
         align-items: center;
         justify-content: center;
+        .stand-footer{
+            justify-content: center;
+        }
+    }
+
+    .card-detail{
+        box-shadow: $sombra;
+        margin-bottom: 20px;
+        padding: 20px;
+        .link{
+            text-decoration: none !important;
+            color: #3e7bde!important;
+        }
     }
 
     .card-containner{

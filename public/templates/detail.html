@@ -1,7 +1,8 @@
-<a href="#/breweries">Back</a>
+<div class="flex home-page">
+    <a href="#/breweries" class="title-detail"> <span class="letter-back"><</span> Back</a>
+</div>
 
-
-<div>
+<div class="card-detail">
     <h1 class="flex">{{brewerie.name}}</h1>
     <span class="flex">Type: {{brewerie.brewery_type}}</span>
     <span class="flex">Street: {{brewerie.street}}</span>
@@ -9,8 +10,8 @@
     <span class="flex">State: {{brewerie.state}}</span>
     <span class="flex">Postal code: {{brewerie.postal_code}}</span>
     <span class="flex">Country: {{brewerie.country}}</span>
-    <span class="flex">Website: {{brewerie.website_url}}</span>
+    <span class="flex">Website: <a target="blank" href="{{brewerie.website_url}}" class="link">{{brewerie.website_url}}</a></span>
     <span class="flex">Phone: {{brewerie.phone}}</span>
-    <span class="flex">Open in maps: </span>
+    <span class="flex">Open in maps: <a ng-if="brewerie.latitude" target="blank" href="http://maps.google.com/maps?q={{brewerie.latitude+','+brewerie.longitude}}" class="link" >{{brewerie.latitude+','+brewerie.longitude}}</a> </span>
     
 </div>
