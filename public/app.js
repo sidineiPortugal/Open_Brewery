@@ -21,8 +21,9 @@ app.service('breweryDB', ['$http', function($http){
 
     let breweries_url = 'https://api.openbrewerydb.org/breweries';
 
-    let list_breweries = (()=>{
-        return $http.get(breweries_url);
+    let list_breweries = ((filters)=>{
+        
+        return $http.get(breweries_url+filters);
     });
     let detail_brewerie = ((id)=>{
         return $http.get(breweries_url + '/' + id);
@@ -36,9 +37,72 @@ app.service('breweryDB', ['$http', function($http){
 
 //Controllers
 app.controller('app_controller', ['$scope', 'breweryDB' , function($scope, breweryDB){
+    $scope.by_types = [{
+        value:'todos',
+        background:'#00d1b2',
+        color:'#fff'
+    },
+    {
+        value:'micro',
+        background:'#00d1b2',
+        color:'#fff'
+    },
+    {
+        value:'nano',
+        background:'#00d1b2',
+        color:'#fff'
+    },
+    {
+        value:'regional',
+        background:'#3273dc',
+        color:'#fff'
+    },
+    {
+        value:'brewpub',
+        background:'#ffdd57',
+        color:'black'
+    },{
+        value:'large',
+        background:'#ffdd57',
+        color:'black'
+    },{
+        value:'planning',
+        background:'#3273dc',
+        color:'#fff'
+    },{
+        value:'bar',
+        background:'#3273dc',
+        color:'#fff'
+    },{
+        value:'contract',
+        background:'#ffdd57',
+        color:'black'
+    },{
+        value:'proprietor',
+        background:'#ffdd57',
+        color:'black'
+    },{
+        value:'closed',
+        background:'#ffdd57',
+        color:'black'
+    }];
+    $scope.changePagination = function(page){
+        if(page != $scope.param.page){
+            $scope.param.page = page;
+            $scope.list();
+        }
+    };
     $scope.breweries = [];
+    $scope.typeValue = 'todos';
+    $scope.param = {
+        type: 'todos',
+        page: 1
+    };
     $scope.list = function(){
-        breweryDB.list_breweries().then((response)=>{
+
+        let url_ = ('?page='+$scope.param.page) + ($scope.param.type != 'todos' ? '&by_type='+$scope.param.type : '');
+
+        breweryDB.list_breweries(url_).then((response)=>{
             $scope.breweries = response.data
             console.log(response.data);
         })

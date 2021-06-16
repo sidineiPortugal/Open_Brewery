@@ -3,6 +3,10 @@
     width: 100%;
 }
 
+$cinza : #4a4a4a;
+
+$sombra : 0 1px 8px 0 rgb(0 0 0 / 5%), 0 1px 5px 0 rgb(0 0 0 / 5%);
+
 
 html{
     @include flex();
@@ -10,7 +14,7 @@ html{
 	position: relative;
     background: #fff;
     font-family: 'Noto Serif', serif;
-    color: #4a4a4a;
+    color: $cinza;
     .flex{
         display: flex;
         width: 100%;
@@ -23,7 +27,37 @@ html{
         margin: 0px;
         flex-wrap: wrap;
         .stand{
-            margin: 0px 10%;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .home-page{
+            padding: 10px 0px;
+        }
+        .title-page{
+            font-weight: bold;
+            padding-right: 5px;
+        }
+    }
+
+    .pagination{
+        @include flex();
+        justify-content: center;
+        .btn{
+            width: 20px;
+            height: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 5px;
+            padding: 5px;
+            box-shadow: $sombra;
+            border-radius: 5px;
+            cursor: pointer;
+            &.active{
+                background: $cinza;
+                color: #fff;
+            }
         }
     }
 
@@ -33,6 +67,12 @@ html{
         align-items: center;
         height: 200px;
         color: #fff;
+        .title-stand{
+            margin-bottom: 0px
+        }
+        .subtitle-stand{
+            margin-top: 1px;
+        }
     }
 
     .footer{
@@ -48,22 +88,42 @@ html{
         justify-content: space-between;
         .card{
             text-decoration: none !important;
-            color: #4a4a4a !important;
+            color: $cinza !important;
             margin: 10px 20px 10px 0px;
             flex-wrap: wrap;
             @include flex();
-            width: 300px;
-            height: 400px;
-            box-shadow: 0 1px 8px 0 rgb(0 0 0 / 5%), 0 1px 5px 0 rgb(0 0 0 / 5%);
+            width: 280px;
+            height: 315px;
+            align-content: flex-start;
+            box-shadow: $sombra;
             .flex{
-                padding: 10px;
+                padding: 20px;
+            }
+            .card-title{
+                font-size: 1.5em;
+                height: 80px;
+                padding: 20px 20px 0px 20px;
+                font-weight: bold;
             }
             .card-description{
+                @include flex();
+                height: 150px;
+                padding: 20px 20px 0px 20px;
                 flex-wrap: wrap;
+                align-content: flex-start;
             }
             .card-footer{
-    
-                border-top: 1px solid black;
+                @include flex();
+                padding: 10px 20px;
+                // height: 14px;
+                border-top: 1px solid #c5c5c538;
+                .tag{
+                    font-size: 0.8em;
+                    padding: 3px;
+                    border-radius: 5px;
+                    background: #00d1b2;
+                    color: #fff;
+                }
             }
         }
     }

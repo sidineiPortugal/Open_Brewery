@@ -1,19 +1,31 @@
-Filter: 
-<select name="" id="">
-    <option value="">micro</option>
-</select>
+<div class="flex home-page">
+    <span class="title-page">
+        Filter: 
+    </span>
+    <select name="" id="" ng-model="param.type" ng-change="list()">
+        <option value="{{type.value}}" ng-repeat="type in by_types">{{type.value}}</option>
+    </select>
+</div>
 <div class="flex card-containner">
 
     <a class="card" ng-repeat="brewerie in breweries" href="#/breweries/{{brewerie.id}}">
-        <h1 class="flex">{{brewerie.name}}</h1>
-        <div class="flex card-description"> 
-            <span class="flex">{{brewerie.street}}</span>
-            <span class="flex">{{brewerie.city + " - " + brewerie.postal_code}}</span>
-            <span class="flex">{{brewerie.country}}</span>
+        <span class="card-title">{{brewerie.name}}</span>
+        <div class="card-description"> 
+            <span class="">{{brewerie.street}}</span>
+            <span class="">{{brewerie.city + " - " + brewerie.postal_code}}</span>
+            <span class="">{{brewerie.country}}</span>
         </div>
-        <div class="flex card-footer">
-            {{brewerie.brewery_type}}
+        <div class="card-footer">
+            <span class="tag">
+                {{brewerie.brewery_type}}
+            </span>
         </div>
     </a>
 
+</div>
+
+<div class="pagination">
+    <span class="btn" ng-class="{'active':param.page == 1}" ng-click="changePagination(1)">1</span>
+    <span class="btn" ng-class="{'active':param.page == 2}" ng-click="changePagination(2)">2</span>
+    <span class="btn" ng-class="{'active':param.page == 3}" ng-click="changePagination(3)">3</span>
 </div>
