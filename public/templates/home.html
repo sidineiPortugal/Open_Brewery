@@ -4,8 +4,8 @@ Filter:
 </select>
 <div class="flex card-containner">
 
-    <div class="card" ng-repeat="brewerie in breweries">
-        <h1>{{brewerie.name}}</h1>
+    <a class="card" ng-repeat="brewerie in breweries" href="#/breweries/{{brewerie.id}}">
+        <h1 class="flex">{{brewerie.name}}</h1>
         <div class="flex card-description"> 
             <span class="flex">{{brewerie.street}}</span>
             <span class="flex">{{brewerie.city + " - " + brewerie.postal_code}}</span>
@@ -14,6 +14,6 @@ Filter:
         <div class="flex card-footer">
             {{brewerie.brewery_type}}
         </div>
-    </div>
+    </a>
 
 </div>

@@ -1,15 +1,20 @@
 var app = angular.module('linx_brewery', ['ngRoute']);
 
 //Configurando as rotas da aplicação
-app.config(['$routeProvider', (($routeProvider)=>{
-    $routeProvider.when('/',{
+app.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider){
+
+    $locationProvider.hashPrefix('');
+
+    $routeProvider.when('/breweries',{
         templateUrl:"public/templates/home.html",
         controller:'app_controller'
+    }).when('/breweries/:id',{
+        templateUrl:"public/templates/detail.html",
+        controller:'detail_Controller'
     }).otherwise({
-        redirectTo:'/notfound',
-        templateUrl:"public/templates/detail.html"
+        redirectTo:'/breweries'
     });
-})]);
+}]);
 
 //Rotas externas da aplicação
 app.service('breweryDB', ['$http', function($http){
@@ -40,4 +45,17 @@ app.controller('app_controller', ['$scope', 'breweryDB' , function($scope, brewe
     }, function(erros){ console.log(erros);};
 
     $scope.list();
+}]);
+
+app.controller('detail_Controller', ['$scope', '$routeParams', 'breweryDB', function($scope, $routeParams, breweryDB){
+    console.log($routeParams.id);
+    $scope.brewerie = {};
+    $scope.show_detail = function(){
+        breweryDB.detail_brewerie($routeParams.id).then((response)=>{
+            $scope.brewerie = response.data;
+            console.log(response.data);
+        })
+    }, function(erros){ console.log(erros);};
+
+    $scope.show_detail();
 }]);
