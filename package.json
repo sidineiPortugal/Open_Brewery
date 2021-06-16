@@ -1,0 +1,28 @@
+{
+  "name": "open_brewery",
+  "version": "1.0.0",
+  "description": "linx_teste",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sidineiPortugal/Open_Brewery.git"
+  },
+  "keywords": [
+    "linx"
+  ],
+  "author": "Sidinei",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sidineiPortugal/Open_Brewery/issues"
+  },
+  "homepage": "https://github.com/sidineiPortugal/Open_Brewery#readme",
+  "devDependencies": {},
+  "dependencies": {
+    "angular": "^1.8.2",
+    "angular-route": "^1.8.2",
+    "sass": "^1.35.1"
+  }
+}
