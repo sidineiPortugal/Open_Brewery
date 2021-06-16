@@ -4,12 +4,29 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="public/global.min.css">
     <title>Linx - Brewery</title>
 </head>
 <body>
 
-    <ng-view></ng-view>
+    <!-- Cabeçalho da aplicação -->
+    <header class="header">
+        <div class="stand">
+            <h1>Breweries</h1>
+            <p>A breweries list by Open Brewevery DB</p>
+        </div>
+    </header>
 
+    <!-- Corpo da aplicação -->
+    <ng-view class="stand"></ng-view>
+
+
+    <!-- Rodapé da aplicação -->
+    <footer class="footer">
+        <div class="stand">Breweries List</div>
+    </footer>
+
+    <!-- Scripts -->
     <script src="public/js/angular.min.js"></script>
     <script src="public/js/angular-route.min.js"></script>
     <script src="public/app.js"></script>

@@ -1,0 +1,19 @@
+Filter: 
+<select name="" id="">
+    <option value="">micro</option>
+</select>
+<div class="flex card-containner">
+
+    <div class="card" ng-repeat="brewerie in breweries">
+        <h1>{{brewerie.name}}</h1>
+        <div class="flex card-description"> 
+            <span class="flex">{{brewerie.street}}</span>
+            <span class="flex">{{brewerie.city + " - " + brewerie.postal_code}}</span>
+            <span class="flex">{{brewerie.country}}</span>
+        </div>
+        <div class="flex card-footer">
+            {{brewerie.brewery_type}}
+        </div>
+    </div>
+
+</div>

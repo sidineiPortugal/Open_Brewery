@@ -1,3 +1,64 @@
-.html{
-    background: red;
+@mixin flex {
+    display: flex;
+    width: 100%;
+}
+
+
+html{
+    @include flex();
+	height: 100%;
+	position: relative;
+    background: #fff;
+
+    .flex{
+        display: flex;
+        width: 100%;
+    }
+    
+    body{
+        @include flex();
+        align-content: flex-start;
+        
+        margin: 0px;
+        flex-wrap: wrap;
+        .stand{
+            margin: 0px 10%;
+        }
+    }
+
+    .header{
+        @include flex();
+        background: #323131;
+        align-items: center;
+        height: 200px;
+        color: #fff;
+    }
+
+    .footer{
+        @include flex();
+        background: #fafafa;
+        height: 200px;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .card-containner{
+        flex-wrap: wrap;
+        .card{
+            margin-right: 10px;
+            flex-wrap: wrap;
+            @include flex();
+            width: 300px;
+            height: 400px;
+            border: 1px solid black;
+            .card-description{
+                flex-wrap: wrap;
+            }
+            .card-footer{
+    
+                border-top: 1px solid black;
+            }
+        }
+    }
+
 }
