@@ -28,6 +28,11 @@ html{
             width: 100%;
             max-width: 1200px;
             margin: 0 auto;
+            &.body-ct{
+                @media(max-width: 1200px){ 
+                    padding: 0px 10%;
+                }
+            }
         }
         .home-page{
             padding: 10px 0px;
@@ -73,6 +78,10 @@ html{
         align-items: center;
         height: 200px;
         color: #fff;
+        @media(max-width: 1200px){ 
+            padding: 0px 10%;
+            height: 170px;
+        }
         .title-stand{
             margin-bottom: 0px
         }
@@ -105,6 +114,9 @@ html{
     .card-containner{
         flex-wrap: wrap;
         justify-content: space-between;
+        @media(max-width: 750px){ 
+            justify-content: space-around;
+        }
         .card{
             text-decoration: none !important;
             color: $cinza !important;
